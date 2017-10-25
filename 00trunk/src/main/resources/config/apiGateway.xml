@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<apiGateway>
+	<module id="lq-upauth">
+		<api id="lq-get-up-get-policy" bean="UpYunAuthAction" method="getPolicy" login="0" auth="0" />
+	</module>
+</apiGateway>

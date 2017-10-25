@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<configs>
+	<!-- merge-rule: 合并规则 
+		* order: 对default location 和 extends location 按照顺序查找, 找到第一个就返回 
+		* replace: 对default location 和 extends location 按照 1 + N 合并(返回最后一个N配置),于order正好相反。 
+		* merge: 对default location 和 extends location 读取为配置列表(仅针对XML, 合并Document) 
+		* default: replace -->
+	<!-- type: 配置类型 
+		* Properties files (已实现) 
+		* XML documents (已实现) 
+		* Property  list files (.plist) 
+		* JNDI 
+		* JDBC Datasource 
+		* System properties 
+		* Applet parameters 
+		* Servlet parameters -->
+	<config domain="myenv" description="环境配置" merge-rule="replace">
+		<default type="xml" location="classpath*:myenv_base.xml" />
+		<extends type="xml" location="classpath:myenv.xml" />
+		<extends type="xml" location="classpath:myenv/myenv_local.xml" />
+		<extends type="xml" location="file:///${user.home}/slh2/myenv.xml" /> <!-- 开发者个人机器的用户目录 -->
+		<extends type="xml" location="file:///mysh/etc/web/slh2/myenv.xml" />
+		<extends type="xml" location="file:///etc/mysh/web/slh2/myenv.xml" />
+	</config>
+
+	<config domain="db" description="数据库" merge-rule="replace">
+		<default type="properties" location="classpath*:db_base.properties" />
+		<extends type="properties" location="classpath:db.properties" />
+		<extends type="properties" location="classpath:myenv/db.properties" /> <!-- 兼容 -->
+		<extends type="properties" location="file:///${user.home}/slh2/db.properties" /> <!-- 开发者个人机器的用户目录 -->
+		<extends type="properties" location="file:///mysh/etc/web/slh2/db.properties" />
+		<extends type="properties" location="file:///etc/mysh/web/slh2/db.properties" />
+	</config>
+
+	<config domain="log4j2" description="日志" merge-rule="lastone">
+		<default type="xml" location="classpath*:log4j2_base.xml" />
+		<extends type="xml" location="classpath:log4j2.xml" />
+		<extends type="xml" location="file:///${user.home}/slh2/log4j2.xml" /> <!-- 开发者个人机器的用户目录 -->
+		<extends type="xml" location="file:///mysh/etc/web/log4j2.xml" /> <!-- 部署机器的公用目录 -->
+		<extends type="xml" location="file:///mysh/etc/web/slh2/log4j2.xml" />
+		<extends type="xml" location="file:///etc/mysh/web/slh2/log4j2.xml" />
+	</config>
+
+	<config domain="dubbo" description="Dubbo" merge-rule="replace">
+		<default type="properties" location="classpath*:dubbo.properties" />
+		<extends type="properties" location="classpath:myenv/dubbo_local.properties" />
+		<extends type="properties" location="file:///${user.home}/dubbo.properties" /> <!-- 开发者个人机器的用户目录 -->
+		<extends type="properties" location="file:///${user.home}/slh2/dubbo.properties" /> <!-- 开发者个人机器的用户目录 -->
+		<extends type="properties" location="file:///mysh/etc/web/slh2/dubbo.properties" />
+		<extends type="properties" location="file:///etc/mysh/web/slh2/dubbo.properties" />
+	</config>
+
+	<config domain="i18n_cn" description="国际化配置中文" merge-rule="replace">
+		<default type="properties" location="classpath*:msg/msg.properties" />
+	</config>
+
+	<config domain="i18n_tw" description="国际化配置中文繁体" merge-rule="replace">
+		<default type="properties" location="classpath*:msg/msg_tw.properties" />
+	</config>
+
+	<config domain="i18n_en" description="国际化配置英文" merge-rule="replace">
+		<default type="properties" location="classpath*:msg/msg_en.properties" />
+	</config>
+</configs>
