@@ -10,20 +10,4 @@
  			http://www.springframework.org/schema/context
 			http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/view/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="defaultEncoding" value="utf-8" />
-		<property name="maxUploadSize" value="10485760000" />
-		<property name="maxInMemorySize" value="40960" />
-	</bean>
-
-	<mvc:resources mapping="/jsons/**" location="/jsons/" />
-	<mvc:resources mapping="/images/**" location="/images/" />
-	<mvc:resources mapping="/javascripts/**" location="/javascripts/" />
-	<mvc:resources mapping="/stylesheets/**" location="/stylesheets/" />
-
-	<mvc:annotation-driven />
 </beans>
