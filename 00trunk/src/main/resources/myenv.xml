@@ -14,4 +14,11 @@
 	<mc_redis_pool_pass>qiuxs</mc_redis_pool_pass>
 	<!-- 集群 -->
 	<cluster>album01</cluster>
+
+	<!-- 操作员 -->
+	<upyun_operator>qiuxs</upyun_operator>
+	<!-- 操作员密码 -->
+	<upyun_password>Qiu1162796928</upyun_password>
+	<!-- 服务名 -->
+	<upyun_bucket>qiuxs-test</upyun_bucket>
 </system>

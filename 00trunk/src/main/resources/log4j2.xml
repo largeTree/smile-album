@@ -23,12 +23,12 @@
 	</Appenders>
 
 	<Loggers>
- 		<Logger name="com.hzecool" level="info">
+ 		<Logger name="com.qiuxs" level="info">
 		</Logger>
-		<Logger name="com.hzecool.core.log.logger.Nagios" level="info">
+		<Logger name="com.qiuxs.core.log.logger.Nagios" level="info">
 			<AppenderRef ref="NagiosRollingFile" />
 		</Logger>
-		<Logger name="com.hzecool.core.log.logger.Console" level="debug" additivity="false">
+		<Logger name="com.qiuxs.core.log.logger.Console" level="debug" additivity="false">
 			<AppenderRef ref="STDOUT" />
 		</Logger>
 		
