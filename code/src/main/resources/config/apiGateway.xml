@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <apiGateway>
+	<module id="biz">
+		<api id="lq-album-create" bean="AlbumAction" method="create" login="1" auth="0" />
+	</module>
 	<module id="lq-upauth">
 		<api id="lq-get-up-get-policy" bean="UpYunAuthAction" method="getPolicyAndSignature" login="0" auth="0" />
 	</module>

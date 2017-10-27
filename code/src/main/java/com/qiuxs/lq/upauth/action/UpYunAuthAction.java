@@ -1,4 +1,4 @@
-package com.qiuxs.lq.album.upauth;
+package com.qiuxs.lq.upauth.action;
 
 import java.util.Date;
 import java.util.HashMap;
