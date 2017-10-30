@@ -1,0 +1,69 @@
+<div class="page-header">
+	<h2>成为注册用户</h2>
+</div>
+
+<div class="lq-register-container container-fluid">
+	<form class="form-horizontal">
+		<div class="row form-group">
+			<label for="userCode" class="col-sm-2 control-label">帐号<span class="lq-must-input">*</span></label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="userCode" ng-model="user.code" placeholder="输入你想要的帐号...">
+			</div>
+			<div class="col-sm-4 err-msg" ng-if="invalided('userCode')">{{errMsg.userCode}}</div>
+		</div>
+		<div class="row form-group">
+			<label for="userPassword" class="col-sm-2 control-label">密码<span class="lq-must-input">*</span></label>
+			<div class="col-sm-6">
+				<input type="password" class="form-control" ng-model="user.password" id="userPassword" placeholder="设置你的密码">
+			</div>
+			<div class="col-sm-4 err-msg" ng-if="invalided('userPassword')">{{errMsg.userPassword}}</div>
+		</div>
+		<div class="row form-group">
+			<label for="userPasswordCk" class="col-sm-2 control-label">确认密码<span class="lq-must-input">*</span></label>
+			<div class="col-sm-6">
+				<input type="password" class="form-control" ng-model="user.passwordCk" id="userPasswordCk" placeholder="确认你的密码">
+			</div>
+			<div class="col-sm-4 err-msg" ng-if="invalided('userPasswordCk')">{{errMsg.userPasswordCk}}</div>
+		</div>
+		<div class="row form-group">
+			<label for="userSign" class="col-sm-2 control-label">个性签名</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" ng-model="user.sign" id="userSign" placeholder="确认你的密码">
+			</div>
+		</div>
+		<div class="row form-group">
+			<label for="userPhone" class="col-sm-2 control-label">手机号码</label>
+			<div class="col-sm-6">
+				<input type="password" class="form-control" ng-model="user.phone" id="userPhone" placeholder="输入你的手机号码">
+			</div>
+			<div class="col-sm-4 err-msg" ng-if="invalided('userPhone')">{{errMsg.userPhone}}</div>
+		</div>
+		<div class="row form-group">
+			<label for="userEmail" class="col-sm-2 control-label">邮箱</label>
+			<div class="col-sm-6">
+				<input type="email" class="form-control" ng-model="user.email" id="userEmail" placeholder="输入你的邮箱">
+			</div>
+			<div class="col-sm-4 err-msg" ng-if="invalided('userEmail')">{{errMsg.userEmail}}</div>
+		</div>
+		<div class="row form-group">
+			<label for="userJcaptchaCode" class="col-sm-2 control-label">验证码<span class="lq-must-input">*</span></label>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" ng-model="user.jcaptchaCode" id="userJcaptchaCode" placeholder="输入验证码">
+			</div>
+			<div class="col-sm-3">
+				<div class="lq-jcaptcha-container">
+					<img src="{{serverUrl}}/jcaptcha/get?_{{time}}" width="100%" height="100%" />
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<a href="javascript:void(0)" ng-click="reGetJcaptcha('userJcaptchaCode')" style="font-size: 12px;">看不清,换一张</a>
+			</div>
+			<div class="col-sm-2 err-msg" ng-if="invalided('userJcaptchaCode')">{{errMsg.userJcaptchaCode}}</div>
+		</div>
+		<div class="row form-group">
+			<div class="col-sm-offset-4 col-sm-10">
+				<button type="submit" class="btn btn-default" ng-click="doRegister()">注册</button>
+			</div>
+		</div>
+	</form>
+</div>

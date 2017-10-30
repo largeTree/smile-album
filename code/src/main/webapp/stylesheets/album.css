@@ -3,6 +3,12 @@
 	background-color: #F5F5DC;
 }
 
+/*
+	注册页背景色
+*/
+.album-register-bg-color {
+}
+
 /**
 	相册节点
 */
@@ -57,4 +63,15 @@
 	opacity: 0.3;
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius:2px;
+}
+
+/*
+	必填标记
+*/
+.lq-must-input {
+	color:red;
+}
+
+.lq-jcaptcha-container {
+	border: 1px #CCCCCC solid;
 }

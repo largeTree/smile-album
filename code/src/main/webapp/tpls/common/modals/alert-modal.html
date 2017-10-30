@@ -1,0 +1,18 @@
+<div style="padding: 20px 30px;">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 ec-center">
+				<h4>{{options.title}}</h4>
+				{{options.text}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">&nbsp;</div>
+		</div>
+		<div class="row" ng-if="!options.hiddenBtn">
+			<div class="col-xs-12 ec-center">
+				<button class="btn btn-info btn-sm" ng-click="done('1')">{{options.btnlabel||'确&nbsp;&nbsp;&nbsp;&nbsp;认'}}</button>
+			</div>
+		</div>
+	</div>
+</div>
