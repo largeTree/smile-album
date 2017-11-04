@@ -23,7 +23,7 @@ import javax.annotation.Resource;
 import com.qiuxs.frm.service.filter.IServiceFilter;
 import com.qiuxs.frm.service.impl.IdServiceFilter;
 import org.springframework.stereotype.Service;
-import com.qiuxs.bizfdn.frm.service.AbstractEcService;
+import com.qiuxs.bizfdn.frm.service.AbstractService;
 import com.qiuxs.frm.dao.paging.PageInfo;
 import com.qiuxs.frm.action.ActionConstants;
 
@@ -33,7 +33,7 @@ import com.qiuxs.frm.action.ActionConstants;
  * @since 
  */
 @Service("UserService")
-public class UserService extends AbstractEcService<Long, User, UserDao>
+public class UserService extends AbstractService<Long, User, UserDao>
 	 {
 	
 	@Resource

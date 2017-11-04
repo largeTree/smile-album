@@ -2,7 +2,7 @@
 
 <apiGateway>
 	<module id="auth">
-		<api id="lq-auth-user-create" bean="UserAction" method="create" login="0" auth="0" />
+		<api id="lq-auth-user-create" bean="UserAction" method="create" login="0" auth="0" captcha="1" />
 	</module>
 	<module id="biz">
 		<api id="lq-album-create" bean="AlbumAction" method="create" login="1" auth="0" />
