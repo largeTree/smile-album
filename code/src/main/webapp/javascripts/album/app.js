@@ -1,6 +1,7 @@
 angular.module('album', ['ngRoute', 'ui.bootstrap'])
 
 .constant('consts', {
+	'baseUrl' : './'
 }).constant('ApiKeyConst', {
 }).config(function($routeProvider) {
 	$routeProvider.when('/', {
@@ -14,5 +15,4 @@ angular.module('album', ['ngRoute', 'ui.bootstrap'])
 	});
 }).run(function($rootScope) {
 	$rootScope.pageStyle = 'album-main-bg-color';
-	$rootScope.serverUrl = './';
 });
