@@ -13,7 +13,7 @@ angular.module('album').controller('RegisterController',
 				userJcaptchaCode : '验证码错误'
 			};
 			$scope.fieldValided = {
-				userCode : false,
+				userCode : true,
 				userPassword : true,
 				userPasswordCk : true,
 				userEmail : true,
@@ -23,15 +23,38 @@ angular.module('album').controller('RegisterController',
 			$scope.invalided = function(field) {
 				return !$scope.fieldValided[field];
 			}
-
+			
+			/**
+			 * 验证用户名是否重复
+			 */
+			$scpoe.checkDuplicateCode = function(){
+				
+			}
+			
 			$scope.reGetJcaptcha = function() {
 				// 获取新的验证码
 				$scope.time = new Date().getTime();
 			}
 
 			$scope.doRegister = function() {
+				if(!$scope.user.jcaptchaCode || $scope.user.jcaptchaCode.length == 0) {
+					$scope.errMsg.userJcaptchaCode = '请输入验证码';
+					$scope.fieldValided.userJcaptchaCode = false;
+					return;
+				}
 				CommonSvc.checkJcaptcheCode($scope.user.jcaptchaCode).then(function(result){
-					CommonSvc.alert('Info',result);
+					if(!result) {
+						$scope.errMsg.userJcaptchaCode = '验证码错误';
+						$scope.fieldValided.userJcaptchaCode = false;
+						$scope.reGetJcaptcha();
+					} else {
+						$scope.fieldValided.userJcaptchaCode = true;
+					}
 				});
 			}
+			
+			function checkInput() {
+				
+			}
+			
 		});

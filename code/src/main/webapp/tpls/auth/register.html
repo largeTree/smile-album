@@ -7,7 +7,7 @@
 		<div class="row form-group">
 			<label for="userCode" class="col-sm-2 control-label">帐号<span class="lq-must-input">*</span></label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" id="userCode" ng-model="user.code" placeholder="输入你想要的帐号...">
+				<input type="text" class="form-control" ng-blur="checkDuplicateCode()" id="userCode" ng-model="user.code" placeholder="输入你想要的帐号...">
 			</div>
 			<div class="col-sm-4 err-msg" ng-if="invalided('userCode')">{{errMsg.userCode}}</div>
 		</div>
