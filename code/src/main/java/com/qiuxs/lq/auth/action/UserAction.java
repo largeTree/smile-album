@@ -17,10 +17,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.qiuxs.bizfdn.captcha.jcaptcha.service.JCaptchaService;
 import com.qiuxs.bizfdn.frm.action.BaseAction;
 import com.qiuxs.fdn.bean.ActionResult;
-import com.qiuxs.fdn.exception.utils.ExceptionUtil;
 import com.qiuxs.frm.action.ActionConstants;
 import com.qiuxs.lq.auth.dao.UserDao;
 import com.qiuxs.lq.auth.entity.User;
@@ -35,16 +33,10 @@ import com.qiuxs.lq.auth.service.UserService;
 public class UserAction extends BaseAction<Long, User, UserDao, UserService> {
 
 	@Resource
-	private JCaptchaService jCaptchaSvc;
-
-	@Resource
 	private UserService userService;
 
 	@Override
 	public ActionResult create(Map<String, String> reqParam, String jsonData) {
-		if (!jCaptchaSvc.check(reqParam.get(""))) {
-			ExceptionUtil.throwLoginException("jcaptcja_check_error");
-		}
 		return super.create(reqParam, jsonData);
 	}
 
