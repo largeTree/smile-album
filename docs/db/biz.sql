@@ -2,7 +2,7 @@
 CREATE TABLE `lq_user` (
 	`id` INT(11) PRIMARY KEY,
 	`login_id` VARCHAR(16) NOT NULL COMMENT'帐号',
-	`password` VARCHAR(16) NOT NULL COMMENT'密码', 
+	`password` VARCHAR(32) NOT NULL COMMENT'密码', 
 	`name` VARCHAR(8) NOT NULL COMMENT'用户名',
 	`phone` INT(11) NOT NULL DEFAULT 0 COMMENT'手机号码',
 	`email` VARCHAR(64) NOT NULL DEFAULT '' COMMENT'邮箱',

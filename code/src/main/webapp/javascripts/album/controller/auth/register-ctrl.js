@@ -1,31 +1,39 @@
-angular.module('album').controller(
-		'RegisterController',
-		function($rootScope, $scope, CommonSvc, ApiHelper,consts) {
-			// 设置页面主样式
-			$rootScope.pageStyle = 'album-register-bg-color';
-			$scope.user = {};
-			$scope.time = new Date().getTime();
+angular.module('album').controller('RegisterController', function($rootScope, $scope, $location, CommonSvc, ApiKeyConst, ApiHelper, AppInfo) {
+    // 设置页面主样式
+    $rootScope.pageStyle = 'album-register-bg-color';
+    $scope.duplicateLoginId = false;
+    $scope.user = {};
+    $scope.time = new Date().getTime();
 
-			$scope.reGetJcaptcha = function() {
-				// 获取新的验证码
-				$scope.time = new Date().getTime();
-			}
+    $scope.reGetJcaptcha = function() {
+        // 获取新的验证码
+        $scope.time = new Date().getTime();
+    }
 
-			$scope.doRegister = function() {
-				CommonSvc.checkJcaptcheCode($scope.user.jcaptchaCode).then(
-						function(result) {
-							if (result) {
-								ApiHelper.call(null, 'post', {
-									jsonParam : JSON.stringify($scope.user)
-								}).then(function(data) {
-									alert(data);
-								}, function(e) {
-									alert(e);
-								});
-							} else {
-								$scope.reGetJcaptcha();
-								$scope.captchaErr = true;
-							}
-						});
-			}
-		});
+    /**
+     * 检查
+     */
+    $scope.checkExists = function() {
+        if ($scope.user.loginId) {
+            ApiHelper.post(ApiKeyConst.checkUserExists, { loginId: $scope.user.loginId }).then(function(data) {
+                $scope.duplicateLoginId = data.data.val;
+            });
+        }
+    }
+
+    $scope.doRegister = function() {
+        CommonSvc.checkJcaptcheCode($scope.user.jcaptchaCode).then(
+            function(result) {
+                if (result) {
+                    ApiHelper.post(ApiKeyConst.createUser, { jsonParam: JSON.stringify($scope.user) }).then(function() {
+                        CommonSvc.msg('Info', '注册成功').then(function() {
+                            $location.path('/');
+                        });
+                    });
+                } else {
+                    $scope.reGetJcaptcha();
+                    $scope.captchaErr = true;
+                }
+            });
+    }
+});

@@ -5,17 +5,34 @@
 <div class="lq-register-container container-fluid">
 	<form class="form-horizontal" name="regForm" novalidate>
 		<div class="row form-group">
-			<label for="userCode" class="col-sm-2 control-label">帐号<span class="lq-must-input">*</span></label>
+			<label for="userloginId" class="col-sm-2 control-label">帐号<span class="lq-must-input">*</span></label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" name="code" id="userCode" ng-model="user.code" placeholder="输入你想要的帐号..." required ng-minlength="8" ng-maxlength="16">
+				<input type="text" class="form-control" name="loginId" ng-blur="checkExists()" id="userloginId" ng-model="user.loginId" placeholder="输入你想要的帐号..." required ng-minlength="8" ng-maxlength="16">
 			</div>
 			<div class="col-sm-4">
-				<span style="color: red" ng-show="regForm.code.$dirty && regForm.code.$invalid">
-					<span ng-show="regForm.code.$error.required">✖ 帐号是必须的</span>
-					<span ng-show="regForm.code.$error.minlength">✖ 帐号最少需要8位</span>
-					<span ng-show="regForm.code.$error.maxlength">✖ 帐号最多只能16位</span>
+				<span style="color: red" ng-show="regForm.loginId.$dirty && regForm.code.$invalid">
+					<span ng-show="regForm.loginId.$error.required">✖ 帐号是必须的</span>
+					<span ng-show="regForm.loginId.$error.minlength">✖ 帐号最少需要8位</span>
+					<span ng-show="regForm.loginId.$error.maxlength">✖ 帐号最多只能16位</span>
 				</span>
-				<span style="color: green;font-size: 1.5em;" ng-show="regForm.code.$valid">
+				<span style="color: red;" ng-show="duplicateLoginId">✖ 该帐号已被占用</span>
+				<span style="color: green;font-size: 1.5em;" ng-show="regForm.loginId.$valid && !duplicateLoginId">
+					✔
+				</span>
+			</div>
+		</div>
+		<div class="row form-group">
+			<label for="userName" class="col-sm-2 control-label">用户名<span class="lq-must-input">*</span></label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" name="name" id=""userName"" ng-model="user.name" placeholder="设置一个名字..." required ng-minlength="2" ng-maxlength="8">
+			</div>
+			<div class="col-sm-4">
+				<span style="color: red" ng-show="regForm.name.$dirty && regForm.name.$invalid">
+					<span ng-show="regForm.name.$error.required">✖ 用户名是必须的</span>
+					<span ng-show="regForm.name.$error.minlength">✖ 用户名最少需要2位</span>
+					<span ng-show="regForm.name.$error.maxlength">✖ 用户名最多只能8位</span>
+				</span>
+				<span style="color: green;font-size: 1.5em;" ng-show="regForm.name.$valid">
 					✔
 				</span>
 			</div>
@@ -102,7 +119,7 @@
 			</div>
 			<div class="col-sm-3">
 				<div class="lq-jcaptcha-container">
-					<img src="{{consts.baseUrl}}/jcaptcha/get?_{{time}}" width="100%" height="100%" />
+					<img ng-src="{{baseUrl}}/jcaptcha/get?_={{time}}" width="100%" height="100%" />
 				</div>
 			</div>
 			<div class="col-sm-2">
@@ -122,7 +139,7 @@
 		</div>
 		<div class="row form-group">
 			<div class="col-sm-offset-4 col-sm-10">
-				<button type="button" class="btn btn-info" ng-disabled="!(regForm.code.$valid && regForm.pwd.$valid && regForm.pwd2.$valid && user.password == user.passwordCk && regForm.sign.$valid && regForm.phone.$valid && regForm.email.$valid && regForm.captchaCode.$valid)" ng-click="doRegister()">注册</button>
+				<button type="button" class="btn btn-info" ng-disabled="!(!duplicateLoginId && regForm.loginId.$valid && regForm.name.$valid && regForm.pwd.$valid && regForm.pwd2.$valid && user.password == user.passwordCk && regForm.sign.$valid && regForm.phone.$valid && regForm.email.$valid && regForm.captchaCode.$valid && !captchaErr)" ng-click="doRegister()">注册</button>
 			</div>
 		</div>
 	</form>

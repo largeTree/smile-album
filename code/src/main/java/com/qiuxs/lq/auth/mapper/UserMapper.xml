@@ -106,6 +106,12 @@
 			and `updated_date` = #{updatedDate}			
 		</if>
 	</sql>
+	
+	<sql id="bizKeysWhereClause">
+		<if test='loginId != null and loginId != ""'>
+			login_id = #{loginId}
+		</if>
+	</sql>
     
 	<select id="get" resultType="com.qiuxs.lq.auth.entity.User" parameterType="Long" >
 		select <include refid="allFields"/> 
@@ -119,6 +125,14 @@
 		<foreach collection="list" item="item" open="(" close=")" separator=",">
 			#{item}
 		</foreach>
+	</select>
+	
+	<select id="getByBizKeys" resultType="com.qiuxs.lq.auth.entity.User" parameterType="Map" >
+		select <include refid="allFields"/> 
+		  from lq_user 
+		 <where>
+		    <include refid="bizKeysWhereClause"/>
+		</where>
 	</select>
 		
 	<select id="getAll" resultType="com.qiuxs.lq.auth.entity.User">
@@ -197,6 +211,15 @@
 		  where id = #{id}
 	</update>
 	
+	<update id="updateByBizKeys" parameterType="com.qiuxs.lq.auth.entity.User">
+		 update lq_user 
+		    <set>
+		    	<include refid="setComn"/>
+			</set>
+		 <where>
+		    <include refid="bizKeysWhereClause"/>
+		</where>
+	</update>		
 	
 	<delete id="delete">
 		delete from lq_user where id = #{id}
@@ -217,4 +240,10 @@
 		</where>
 	</delete>	
 	
+	<delete id="deleteByBizKeys" parameterType="Map">
+		delete from lq_user 
+		<where>
+		    <include refid="bizKeysWhereClause"/>
+		</where>
+	</delete>		
 </mapper>    

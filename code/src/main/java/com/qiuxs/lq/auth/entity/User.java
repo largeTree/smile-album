@@ -6,7 +6,7 @@
  * ----------------------------------------------------------------------------------------------
  * 修改原因: 新增
  * 修改人员: qiuxs
- * 修改日期: 2017-10-30
+ * 修改日期: 2017-11-8
  * 修改内容: 
  */
 package com.qiuxs.lq.auth.entity;
@@ -16,7 +16,7 @@ import com.qiuxs.fdn.entity.IStatus;
 
 /**
  * 用户表对象类
- * @author qiuxs created on 2017-10-30
+ * @author qiuxs created on 2017-11-8
  * @since
  */
 public class User extends BaseEntity<Long> implements IStatus {
@@ -42,9 +42,6 @@ public class User extends BaseEntity<Long> implements IStatus {
 	
 	/***/		
 	private Integer status;
-	
-	/***/		
-	private String UNIQUE;
 	
 	public String getLoginId() {
 		return loginId;
@@ -100,14 +97,6 @@ public class User extends BaseEntity<Long> implements IStatus {
 
 	public void setStatus(Integer status) {
 		this.status = status;
-	}
-	
-	public String getUNIQUE() {
-		return UNIQUE;
-	}
-
-	public void setUNIQUE(String UNIQUE) {
-		this.UNIQUE = UNIQUE;
 	}
 	
 	@Override

@@ -6,21 +6,21 @@
  * ----------------------------------------------------------------------------------------------
  * 修改原因: 新增
  * 修改人员: qiuxs
- * 修改日期: 2017-10-30
+ * 修改日期: 2017-11-8
  * 修改内容: 
  */
 package com.qiuxs.lq.auth.dao;
-import com.qiuxs.frm.dao.IParentDAO;
+import com.qiuxs.frm.dao.IParentDaoWithBizKeys;
 import com.qiuxs.frm.dao.MyBatisRepository;
 import com.qiuxs.lq.auth.entity.User;
 
 /**
  * 用户表Dao接口类
  * 
- * @author qiuxs created on 2017-10-30
+ * @author qiuxs created on 2017-11-8
  * @since 
  */
  @MyBatisRepository
-public interface UserDao extends IParentDAO<Long, User> {
+public interface UserDao extends IParentDaoWithBizKeys<Long, User> {
 
 }

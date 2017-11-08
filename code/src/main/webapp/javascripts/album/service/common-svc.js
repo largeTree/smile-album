@@ -8,7 +8,7 @@ angular.module('album').factory('CommonSvc',
 				var deferred = $q.defer();
 				$http({
 					method : 'POST',
-					url : $rootScope.serverUrl + '/jcaptcha/check',
+					url : $rootScope.baseUrl + '/jcaptcha/check',
 					params : {
 						captcha : code
 					},
