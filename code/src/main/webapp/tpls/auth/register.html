@@ -10,7 +10,7 @@
 				<input type="text" class="form-control" name="loginId" ng-blur="checkExists()" id="userloginId" ng-model="user.loginId" placeholder="输入你想要的帐号..." required ng-minlength="8" ng-maxlength="16">
 			</div>
 			<div class="col-sm-4">
-				<span style="color: red" ng-show="regForm.loginId.$dirty && regForm.code.$invalid">
+				<span style="color: red" ng-show="regForm.loginId.$dirty && regForm.loginId.$invalid">
 					<span ng-show="regForm.loginId.$error.required">✖ 帐号是必须的</span>
 					<span ng-show="regForm.loginId.$error.minlength">✖ 帐号最少需要8位</span>
 					<span ng-show="regForm.loginId.$error.maxlength">✖ 帐号最多只能16位</span>
@@ -139,7 +139,7 @@
 		</div>
 		<div class="row form-group">
 			<div class="col-sm-offset-4 col-sm-10">
-				<button type="button" class="btn btn-info" ng-disabled="!(!duplicateLoginId && regForm.loginId.$valid && regForm.name.$valid && regForm.pwd.$valid && regForm.pwd2.$valid && user.password == user.passwordCk && regForm.sign.$valid && regForm.phone.$valid && regForm.email.$valid && regForm.captchaCode.$valid && !captchaErr)" ng-click="doRegister()">注册</button>
+				{{user.loginId}}<button type="button" class="btn btn-info" ng-disabled="!(!duplicateLoginId && regForm.loginId.$valid && regForm.name.$valid && regForm.pwd.$valid && regForm.pwd2.$valid && user.password == user.passwordCk && regForm.sign.$valid && regForm.phone.$valid && regForm.email.$valid && regForm.captchaCode.$valid && !captchaErr)" ng-click="doRegister()">注册</button>
 			</div>
 		</div>
 	</form>
