@@ -25,3 +25,14 @@ CREATE TABLE `lq_album` (
 	`updated_by` INT(11) NOT NULL COMMENT'更新时间',
 	`updated_date` DATETIME NOT NULL COMMENT'更新时间',
 );
+
+-- 创建角色表
+CREATE TABLE `lq_role` (
+	`id` TINYINT(2) PRIMARY KEY AUTO_INCREMENT,
+	`code` VARCHAR(8) NOT NULL COMMENT'角色编码',
+	`name` VARCHAR(8) NOT NULL COMMENT'角色名',
+	UNIQUE KEY `UK_lq_role_code`(`code`)
+);
+
+-- 用户表添加角色属性
+ALTER TABLE `lq_user` ADD COLUMN role_ids VARCHAR(32) NOT NULL DEFAULT '0' COMMENT'角色ID' AFTER `status`;

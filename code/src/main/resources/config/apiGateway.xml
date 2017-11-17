@@ -2,6 +2,7 @@
 
 <apiGateway>
 	<module id="auth">
+		<api id="lq-auth-login" bean="LoginAction" method="login" login="0" auth="0" />
 		<api id="lq-auth-user-check-exists" bean="UserAction" method="checkLoginIdExists" login="0" auth="0" />
 		<api id="lq-auth-user-create" bean="UserAction" method="create" login="0" auth="0" captcha="1" />
 	</module>

@@ -1,11 +1,11 @@
-angular.module('album', ['ngRoute', 'ui.bootstrap','ngCookies'])
+angular.module('album', [ 'ngRoute', 'ui.bootstrap', 'ngCookies' ])
 
 .constant('AppInfo', {
 	'baseUrl' : './'
 }).constant('ApiKeyConst', {
 	checkUserExists : 'lq-auth-user-check-exists',
-	createUser:'lq-auth-user-create',
-	login:'lq-auth-login'
+	createUser : 'lq-auth-user-create',
+	login : 'lq-auth-login'
 }).config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'tpls/entry.html',
@@ -13,14 +13,25 @@ angular.module('album', ['ngRoute', 'ui.bootstrap','ngCookies'])
 	}).when('/reg', {
 		templateUrl : 'tpls/auth/register.html',
 		controller : 'RegisterController'
-	}).when('/login',{
+	}).when('/login', {
 		templateUrl : 'tpls/auth/login.html',
 		controller : 'LoginController'
-	})
-	.otherwise({
+	}).otherwise({
 		redirectTo : '/'
 	});
-}).run(function($rootScope,AppInfo) {
+}).run(function($rootScope, $cookies, AppInfo) {
+
+	$rootScope.signOut = function() {
+		delete $rootScope.session;
+		$cookies.remove('lq_user_session');
+		$rootScope.isOnline = false;
+	}
+	$rootScope.isOnline = false;
 	$rootScope.baseUrl = AppInfo.baseUrl;
 	$rootScope.pageStyle = 'album-main-bg-color';
+	var lastSession = $cookies.get('lq_user_session');
+	if (lastSession != null) {
+		$rootScope.session = JSON.parse(lastSession);
+		$rootScope.isOnline = true;
+	}
 });

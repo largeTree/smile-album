@@ -64,7 +64,7 @@
 					<p class="navbar-text "></p>
 				</div>
 				<!-- 登录/注册 -->
-				<div class="lq-nav-login-info navbar-right btn-toolbar">
+				<div class="lq-nav-login-info navbar-right btn-toolbar" ng-if="!isOnline">
 					<a type="button" class="btn navbar-btn btn-default" href="#/login">Sign in</a> <a type="button" class="btn navbar-btn btn-info" href="#/reg">sign up</a>
 				</div>
 				<div class="navbar-right">
@@ -73,13 +73,14 @@
 				<!-- 个人信息展示 -->
 				<div class="navbar-right">
 					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户名
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{session.name || '用户名'}}
 								<span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu">
-								<li><a href="#">个人信息</a></li>
+								<li><a href="#/">个人信息</a></li>
+								<li><a href="#/">我的相册</a></li>
 								<li role="separator" class="divider"></li>
-								<li><a href="#">我的相册</a></li>
+								<li><a href="javascript:void(0)" ng-click="signOut()">退出</a></li>
 							</ul></li>
 					</ul>
 					<p class="navbar-text "></p>

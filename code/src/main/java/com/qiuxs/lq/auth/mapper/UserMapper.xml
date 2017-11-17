@@ -13,6 +13,7 @@
 		`email`,
 		`sign`,
 		`status`,
+		`role_ids` as roleIds,
 		`created_date` as createdDate,
 		`updated_date` as updatedDate
     </sql>
@@ -26,6 +27,7 @@
 		`email`,
 		`sign`,
 		`status`,
+		`role_ids`,
 		`created_date`,
 		`updated_date`
     </sql>
@@ -41,6 +43,7 @@
 			#{email},
 			#{sign},
 			#{status},
+			#{role_ids},
 			#{createdDate},
 			#{updatedDate}
 		)
@@ -58,6 +61,7 @@
 				#{item.email},
 				#{item.sign},
 				#{item.status},
+				#{item.role_ids},
 				#{item.createdDate},
 				#{item.updatedDate}
 			)
@@ -186,6 +190,9 @@
 		</if>
 		<if test="status != null">
 			`status` = #{status},
+		</if>
+		<if test="roleIds != null">
+			`role_ids` = #{roleIds},
 		</if>
 		<if test="createdDate != null">
 			`created_date` = #{createdDate},
