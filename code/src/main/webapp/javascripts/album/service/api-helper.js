@@ -1,7 +1,7 @@
-angular.module('album').factory('ApiHelper', function($q, $http, AppInfo, CommonSvc) {
+angular.module('album').factory('ApiHelper', function($rootScope, $q, $http, AppInfo, CommonSvc) {
 
     /**
-    	总入口方法
+        总入口方法
     */
     var call0 = function(url, method, params, headers) {
         url = url || AppInfo.baseUrl + 'api.do';
@@ -11,6 +11,11 @@ angular.module('album').factory('ApiHelper', function($q, $http, AppInfo, Common
         if (!headers['Content-Type']) {
             headers['Content-Type'] = 'application/x-www-form-urlencoded';
         }
+
+        if ($rootScope.session) {
+            params.sessionId = $rootScope.session.sessionId;
+        }
+
         var defer = $q.defer();
         $http({
             method: method,
@@ -18,7 +23,7 @@ angular.module('album').factory('ApiHelper', function($q, $http, AppInfo, Common
             params: params,
             headers: headers,
             cache: false,
-            timeout: 2000
+            timeout: 20000
         }).success(function(data, status, headers, config) {
             defer.resolve(data);
         }).error(function(data, status, headers, config) {
@@ -28,7 +33,7 @@ angular.module('album').factory('ApiHelper', function($q, $http, AppInfo, Common
     }
 
     /**
-		post
+        post
     */
     var post0 = function(apiKey, params) {
         var defer = $q.defer();
@@ -42,6 +47,12 @@ angular.module('album').factory('ApiHelper', function($q, $http, AppInfo, Common
                 });
             }
         }, function(e) {
+            if (!e) {
+                e = {
+                    code: -1,
+                    msg: '请求超时'
+                };
+            }
             defer.reject(e);
         });
         return defer.promise;

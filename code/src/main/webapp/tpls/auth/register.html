@@ -139,7 +139,7 @@
 		</div>
 		<div class="row form-group">
 			<div class="col-sm-offset-4 col-sm-10">
-				{{user.loginId}}<button type="button" class="btn btn-info" ng-disabled="!(!duplicateLoginId && regForm.loginId.$valid && regForm.name.$valid && regForm.pwd.$valid && regForm.pwd2.$valid && user.password == user.passwordCk && regForm.sign.$valid && regForm.phone.$valid && regForm.email.$valid && regForm.captchaCode.$valid && !captchaErr)" ng-click="doRegister()">注册</button>
+				<button type="button" class="btn btn-info" ng-disabled="!(!duplicateLoginId && regForm.loginId.$valid && regForm.name.$valid && regForm.pwd.$valid && regForm.pwd2.$valid && user.password == user.passwordCk && regForm.sign.$valid && regForm.phone.$valid && regForm.email.$valid && regForm.captchaCode.$valid && !captchaErr)" ng-click="doRegister()">注册</button>
 			</div>
 		</div>
 	</form>

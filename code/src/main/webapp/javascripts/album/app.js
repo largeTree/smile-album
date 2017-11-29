@@ -5,7 +5,8 @@ angular.module('album', [ 'ngRoute', 'ui.bootstrap', 'ngCookies' ])
 }).constant('ApiKeyConst', {
 	checkUserExists : 'lq-auth-user-check-exists',
 	createUser : 'lq-auth-user-create',
-	login : 'lq-auth-login'
+	login : 'lq-auth-login',
+	privateAlbum:'lq-album-list-private'
 }).config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'tpls/entry.html',
