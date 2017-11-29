@@ -9,14 +9,16 @@ angular.module('album').controller('LoginController', function($rootScope, $scop
     };
     
     $scope.login = function() {
+        $rootScope.loading = true;
         ApiHelper.post(ApiKeyConst.login, { jsonParam: $scope.jsonParam }).then(function(data) {
     		$rootScope.session = data.data;
     		$rootScope.isOnline = true;
     		setCookies();
-    		CommonSvc.msg('info','登录成功',500).then(function() {
-        		$location.path('/');
-    		});
+    		CommonSvc.msg('info','登录成功',500);
+            $location.path('/');
+            $rootScope.loading = false;
         }, function(e) {
+            $rootScope.loading = false;
         	if(e.code && e.code == -3) {
         		$scope.loginError = e.msg;
         	} else {
@@ -33,6 +35,10 @@ angular.module('album').controller('LoginController', function($rootScope, $scop
     		$cookies.put('lq_login_RemberMe',$scope.RemberMe);
     		$cookies.put('lq_login_loginId',$scope.jsonParam.loginId);
     		$cookies.put('lq_login_pass',$scope.jsonParam.pass);
+    	} else {
+    		$cookies.remove('lq_login_RemberMe');
+    		$cookies.remove('lq_login_loginId');
+    		$cookies.remove('lq_login_pass');
     	}
     }
     

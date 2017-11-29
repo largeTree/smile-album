@@ -16,16 +16,21 @@ angular.module('album', [ 'ngRoute', 'ui.bootstrap', 'ngCookies' ])
 	}).when('/login', {
 		templateUrl : 'tpls/auth/login.html',
 		controller : 'LoginController'
+	}).when('/albums',{
+		templateUrl : 'tpls/albums.html',
+		controller : 'MyAlbumsController'
 	}).otherwise({
 		redirectTo : '/'
 	});
-}).run(function($rootScope, $cookies, AppInfo) {
+}).run(function($rootScope, $cookies,$location, AppInfo) {
 
 	$rootScope.signOut = function() {
 		delete $rootScope.session;
 		$cookies.remove('lq_user_session');
 		$rootScope.isOnline = false;
+		$location.path('/');
 	}
+	
 	$rootScope.isOnline = false;
 	$rootScope.baseUrl = AppInfo.baseUrl;
 	$rootScope.pageStyle = 'album-main-bg-color';

@@ -79,7 +79,7 @@ angular.module('album').factory('CommonSvc',
 				var confirmModal = $modal.open({
 					templateUrl : 'tpls/common/modals/alert-modal.html',
 					size : 'sm',
-					backdrop : true,
+					backdrop : false,
 					controller : 'MessageController',
 					resolve : {
 						options : function() {

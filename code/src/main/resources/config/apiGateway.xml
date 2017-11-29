@@ -8,6 +8,8 @@
 	</module>
 	<module id="biz">
 		<api id="lq-album-create" bean="AlbumAction" method="create" login="1" auth="0" />
+		<api id="lq-album-list-public" bean="AlbumAction" method="publicList" login="0" auth="0" />
+		<api id="lq-album-list-private" bean="AlbumAction" method="privateList" login="1" auth="0" />
 	</module>
 	<module id="lq-upauth">
 		<api id="lq-get-up-get-policy" bean="UpYunAuthAction" method="getPolicyAndSignature" login="0" auth="0" />

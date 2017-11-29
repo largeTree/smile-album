@@ -42,6 +42,24 @@ public class AlbumAction extends BaseAction<Long, Album, AlbumDao, AlbumService>
 		return Album.class;
 	}
 
+	/**
+	 * 公开相册列表
+	 * @param params
+	 * @return
+	 */
+	public ActionResult publicList(Map<String, String> params) {
+		return null;
+	}
+
+	/**
+	 * 私有相册列表
+	 * @param params
+	 * @return
+	 */
+	public ActionResult privateList(Map<String, String> params) {
+		return null;
+	}
+
 	@Override
 	public ActionResult list(Map<String, String> reqParam, String jsonData, String listMethod, boolean paging) {
 		reqParam.put("status" + ActionConstants.THAN_EQUAL_SUFFIX, String.valueOf(com.qiuxs.fdn.entity.IStatus.VALID));

@@ -28,7 +28,7 @@ angular.module('album').factory('ApiHelper', function($q, $http, AppInfo, Common
     }
 
     /**
-		创建方法
+		post
     */
     var post0 = function(apiKey, params) {
         var defer = $q.defer();

@@ -35,4 +35,4 @@ CREATE TABLE `lq_role` (
 );
 
 -- 用户表添加角色属性
-ALTER TABLE `lq_user` ADD COLUMN role_ids VARCHAR(32) NOT NULL DEFAULT '0' COMMENT'角色ID' AFTER `status`;
+ALTER TABLE `lq_user` ADD COLUMN role_ids VARCHAR(32) NOT NULL DEFAULT '2' COMMENT'角色ID' AFTER `status`;

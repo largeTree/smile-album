@@ -8,9 +8,9 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>liuqing-album</artifactId>
+	<artifactId>Smile-album</artifactId>
 	<packaging>war</packaging>
-	<name>liuqing-album-server</name>
+	<name>Smile-album-server</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
@@ -30,6 +30,6 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>liuqing-album</finalName>
+		<finalName>Smile-album</finalName>
 	</build>
 </project>
