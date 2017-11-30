@@ -53,10 +53,8 @@ public class AlbumAction extends BaseAction<Long, Album, AlbumDao, AlbumService>
 	 * @return
 	 */
 	public ActionResult publicList(Map<String, String> params) {
-		PageInfo pageInfo = super.genPageInfo(params);
 		params.put("onlySelf", "0");
-		List<Album> list = this.getService().findByWhere(params, pageInfo);
-		return new ActionResult(list);
+		return super.list(params, null);
 	}
 
 	/**
@@ -65,10 +63,8 @@ public class AlbumAction extends BaseAction<Long, Album, AlbumDao, AlbumService>
 	 * @return
 	 */
 	public ActionResult privateList(Map<String, String> params) {
-		PageInfo pageInfo = super.genPageInfo(params);
 		params.put("onlySelf", "1");
-		List<Album> list = this.getService().findByWhere(params, pageInfo);
-		return new ActionResult(list);
+		return super.list(params, null);
 	}
 
 	@Override

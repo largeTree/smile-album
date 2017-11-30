@@ -121,4 +121,10 @@ public class AlbumService extends AbstractService<Long, Album, AlbumDao>
 		prop = new ViewProperty<Object>(new BaseField("updatedDate", "updatedDate", "Date"), null);
     	props.add(prop);
     }
+    
+    @Override
+    public String getDsType() {
+        return super.getDsType();
+    }
+    
 }

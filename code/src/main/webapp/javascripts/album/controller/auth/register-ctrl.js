@@ -1,4 +1,4 @@
-angular.module('album').controller('RegisterController', function($rootScope, $scope, $location, CommonSvc, ApiKeyConst, ApiHelper, AppInfo) {
+angular.module('album').controller('RegisterController', function($rootScope, $scope, $location, CommonSvc, ApiKeyConst, ApiHelper, AppConfig) {
     // 设置页面主样式
     $rootScope.pageStyle = 'album-register-bg-color';
     $scope.duplicateLoginId = false;
