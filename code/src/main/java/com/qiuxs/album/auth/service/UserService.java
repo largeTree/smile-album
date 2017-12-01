@@ -24,6 +24,7 @@ import com.qiuxs.album.auth.entity.User;
 import com.qiuxs.bizfdn.frm.bean.BaseField;
 import com.qiuxs.bizfdn.frm.bean.ViewIndex;
 import com.qiuxs.bizfdn.frm.bean.ViewProperty;
+import com.qiuxs.bizfdn.frm.bean.WriteField;
 import com.qiuxs.bizfdn.frm.service.AbstractService;
 import com.qiuxs.fdn.Constant;
 import com.qiuxs.fdn.utils.security.MD5Util;
@@ -116,8 +117,7 @@ public class UserService extends AbstractService<Long, User, UserDao>
 		filters.add(new IdServiceFilter<Long, User>(tableName));// 为了主键生成
 	}
 
-	// -------------------------------- 以下为增删改查表单元数据配置
-	// -------------------------------- //
+	// -------------------------------- 以下为增删改查表单元数据配置  -------------------------------- 
 	@Override
 	protected String[] collectQueryProps() {
 		return new String[] { "id" };
@@ -145,13 +145,13 @@ public class UserService extends AbstractService<Long, User, UserDao>
 		prop = new ViewProperty<Object>(new BaseField("id", "编号", "Long"), null);
 		props.add(prop);
 
-		prop = new ViewProperty<Object>(new BaseField("loginId", "loginId", "String"), null);
+		prop = new ViewProperty<Object>(new WriteField("loginId", "loginId", "String", "帐号", true), null);
 		props.add(prop);
 
-		prop = new ViewProperty<Object>(new BaseField("password", "password", "String"), null);
+		prop = new ViewProperty<Object>(new WriteField("password", "password", "String", "密码", true), null);
 		props.add(prop);
 
-		prop = new ViewProperty<Object>(new BaseField("name", "name", "String"), null);
+		prop = new ViewProperty<Object>(new WriteField("name", "name", "String", "用户名", true), null);
 		props.add(prop);
 
 		prop = new ViewProperty<Object>(new BaseField("phone", "phone", "Long"), null);

@@ -1,4 +1,4 @@
-angular.module('album').controller('MyAlbumsController', function($rootScope, $scope, $location, CommonSvc, ApiHelper, ApiKeyConst) {
+angular.module('album').controller('MyAlbumsController', function($rootScope, $scope, $location, CommonSvc, AlbumCommSvc, ApiHelper, ApiKeyConst) {
     //  $rootScope.pageStyle = 'album-register-bg-color';
     $rootScope.loading = true;
     if (!$rootScope.isOnline) {
@@ -11,21 +11,10 @@ angular.module('album').controller('MyAlbumsController', function($rootScope, $s
     $scope.albums = new Array();
 
     var loadMyAlbums = function(pageNo) {
-        ApiHelper.post(ApiKeyConst.privateAlbum, {}).then(function(data) {
+        ApiHelper.queryList(ApiKeyConst.privateAlbum, { pageNo: pageNo }).then(function(data) {
             console.log(data);
-            var list = data.data.rows;
-            var row = new Array();
-            // 数据整理  每四个相册放一行
-            for (var i = 0; i < list.length; i++) {
-                row.push(list[i]);
-                if (row.length == 4) {
-                    $scope.albums.push(row);
-                    row = new Array();
-                }
-            }
+            $scope.albums = AlbumCommSvc.transfAlbumsData(data.rows);
             $rootScope.loading = false;
-        }, function(e) {
-            console.log(e);
         });
     }
 
@@ -44,12 +33,16 @@ angular.module('album').controller('MyAlbumsController', function($rootScope, $s
             }, {
                 label: '仅自己可见',
                 type: 'checkbox',
-                fieldName: 'oblySelf',
+                fieldName: 'onlySelf',
             }, {
                 label: '相册描述',
                 type: 'text',
                 fieldName: 'desc'
             }]
+        }).then(function(res) {
+            if (res == 'ok') {
+                loadMyAlbums(1);
+            }
         });
     }
 

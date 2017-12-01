@@ -10,7 +10,7 @@ angular.module('album', ['ngRoute', 'ui.bootstrap', 'ngCookies'])
         privateAlbum: 'lq-album-list-private',
         publicAlbum: 'lq-album-list-public',
         createAlbum: 'lq-album-create'
-    }).config(function($routeProvider) {
+    }).config(function($routeProvider, $httpProvider) {
         $routeProvider.when('/', {
             templateUrl: 'tpls/entry.html',
             controller: 'EntryController'
@@ -25,6 +25,29 @@ angular.module('album', ['ngRoute', 'ui.bootstrap', 'ngCookies'])
             controller: 'MyAlbumsController'
         }).otherwise({
             redirectTo: '/'
+        });
+
+        // 构造http拦截器
+        $httpProvider.interceptors.push(function($rootScope) {
+            return {
+                request: function(config) {
+                    if ($rootScope.session && config.params) {
+                        config.params.sessionId = $rootScope.session.sessionId;
+                    }
+                    return config;
+                },
+                requestError: function(rejection) {
+                    return rejection;
+                },
+                response: function(response) {
+                    $rootScope.loading = false;
+                    return response;
+                },
+                responseError: function(rejection) {
+                    return rejection;
+                }
+
+            };
         });
     }).run(function($rootScope, $cookies, $location, AppConfig) {
 

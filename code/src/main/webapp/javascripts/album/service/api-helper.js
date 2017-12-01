@@ -12,10 +12,6 @@ angular.module('album').factory('ApiHelper', function($rootScope, $q, $http, App
             headers['Content-Type'] = 'application/x-www-form-urlencoded';
         }
 
-        if ($rootScope.session) {
-            params.sessionId = $rootScope.session.sessionId;
-        }
-
         var defer = $q.defer();
         $http({
             method: method,
@@ -25,13 +21,17 @@ angular.module('album').factory('ApiHelper', function($rootScope, $q, $http, App
             cache: false,
             timeout: 20000
         }).success(function(data, status, headers, config) {
+            $rootScope.loading = false;
             defer.resolve(data);
         }).error(function(data, status, headers, config) {
+            $rootScope.loading = false;
             if (data == null) {
-                data = {
-                    code: -1,
-                    msg: '请求超时'
-                };
+                CommonSvc.alert('Error', '请求超时').then(function() {
+                    defer.reject({
+                        code: -1,
+                        msg: '请求超时'
+                    });
+                });
             }
             defer.reject(data);
         });
@@ -66,11 +66,9 @@ angular.module('album').factory('ApiHelper', function($rootScope, $q, $http, App
         params.pageNo = pageNo || 0;
         params.pageSize = pageSize || AppConfig.defPageSize;
         post0(apiKey, params).then(function(data) {
-            defer.resolve(data.rows);
+            defer.resolve(data.data);
         }, function(e) {
-            CommonSvc.alert('Error', e.msg).then(function() {
-                defer.reject(e);
-            });
+            defer.reject(e);
         });
         return defer.promise;
     }
@@ -85,9 +83,7 @@ angular.module('album').factory('ApiHelper', function($rootScope, $q, $http, App
             CommonSvc.msg('Info', data.msg);
             defer.resolve(data);
         }, function(e) {
-            CommonSvc.alert('Error', e.msg).then(function() {
-                defer.reject(e);
-            });
+            defer.reject(e);
         });
         return defer.promise;
     }
@@ -95,7 +91,8 @@ angular.module('album').factory('ApiHelper', function($rootScope, $q, $http, App
     return {
         call: call0,
         post: post0,
-        queryList: queryList0
+        queryList: queryList0,
+        saveForm: saveForm0
     };
 
 });

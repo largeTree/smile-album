@@ -11,20 +11,21 @@
  */
 package com.qiuxs.album.biz.action;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.qiuxs.album.biz.dao.AlbumDao;
 import com.qiuxs.album.biz.entity.Album;
 import com.qiuxs.album.biz.service.AlbumService;
 import com.qiuxs.bizfdn.frm.action.BaseAction;
 import com.qiuxs.fdn.bean.ActionResult;
+import com.qiuxs.fdn.utils.converter.JsonUtils;
 import com.qiuxs.frm.action.ActionConstants;
-import com.qiuxs.frm.dao.paging.PageInfo;
+import com.qiuxs.frm.context.UserContext;
 
 /**
  * 相册表入口
@@ -47,6 +48,13 @@ public class AlbumAction extends BaseAction<Long, Album, AlbumDao, AlbumService>
 		return Album.class;
 	}
 
+	@Override
+	public ActionResult create(Map<String, String> reqParam, String jsonData) {
+		JSONObject json = JsonUtils.toJSONObject(jsonData);
+		json.put("onlySelf", json.getBooleanValue("onlySelf") ? "1" : "0");
+		return super.create(reqParam, json.toJSONString());
+	}
+
 	/**
 	 * 公开相册列表
 	 * @param params
@@ -54,6 +62,7 @@ public class AlbumAction extends BaseAction<Long, Album, AlbumDao, AlbumService>
 	 */
 	public ActionResult publicList(Map<String, String> params) {
 		params.put("onlySelf", "0");
+		params.put("createdByOr", String.valueOf(UserContext.getUserIdOpt()));
 		return super.list(params, null);
 	}
 
@@ -64,6 +73,7 @@ public class AlbumAction extends BaseAction<Long, Album, AlbumDao, AlbumService>
 	 */
 	public ActionResult privateList(Map<String, String> params) {
 		params.put("onlySelf", "1");
+		params.put("createdByOr", String.valueOf(UserContext.getUserIdOpt()));
 		return super.list(params, null);
 	}
 

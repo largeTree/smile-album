@@ -93,6 +93,9 @@
 		<if test="updatedDate != null">
 			and `updated_date` = #{updatedDate}			
 		</if>
+		<if test="createdByOr != null">
+			or created_by = #{createdByOr}
+		</if>
 	</sql>
     
 	<select id="get" resultType="com.qiuxs.album.biz.entity.Album" parameterType="Long" >

@@ -23,6 +23,7 @@ import com.qiuxs.album.biz.entity.Album;
 import com.qiuxs.bizfdn.frm.bean.BaseField;
 import com.qiuxs.bizfdn.frm.bean.ViewIndex;
 import com.qiuxs.bizfdn.frm.bean.ViewProperty;
+import com.qiuxs.bizfdn.frm.bean.WriteField;
 import com.qiuxs.bizfdn.frm.service.AbstractService;
 import com.qiuxs.frm.service.filter.IServiceFilter;
 import com.qiuxs.frm.service.impl.IdServiceFilter;
@@ -34,97 +35,92 @@ import com.qiuxs.frm.service.impl.IdServiceFilter;
  */
 @Service("AlbumService")
 public class AlbumService extends AbstractService<Long, Album, AlbumDao>
-	 {
-	
+{
+
 	@Resource
 	private AlbumDao albumDao;
-	
+
 	private final static String TABLE_NAME = "album";
-    public final static String VIEW_ALBUM = "album";
-	
+	public final static String VIEW_ALBUM = "album";
+
 	/**
-     * 构造函数
-     */
+	 * 构造函数
+	 */
 	public AlbumService() {
-        super();
-        this.pojoClass = Album.class;
-        this.tableName = TABLE_NAME;
-        this.description = "相册表";
-        ViewIndex.putService(VIEW_ALBUM, this);//, ViewIndex.TOPIC_BASE
-    }  
-    
-    @Override
-    public AlbumDao getDao() {
-        return albumDao;
-    }
-    
-    @Override
-    protected void initCreate(Album album) {
-    	super.initCreate(album);
-    }
+		super();
+		this.pojoClass = Album.class;
+		this.tableName = TABLE_NAME;
+		this.description = "相册表";
+		ViewIndex.putService(VIEW_ALBUM, this);// , ViewIndex.TOPIC_BASE
+	}
 
-	
-    @Override
-    protected void initServiceFilters(List<IServiceFilter> filters) {    
-        filters.add(new IdServiceFilter<Long, Album>(tableName));//为了主键生成
-    }
+	@Override
+	public AlbumDao getDao() {
+		return albumDao;
+	}
 
-	// -------------------------------- 以下为增删改查表单元数据配置 -------------------------------- //
-    @Override
-    protected String[] collectQueryProps() {
-        return new String[] {"id"};
-    }
-    
-    @Override
-    protected String[] collectInputProps() {
-    	return new String[] {"id", "name", "onlySelf", "desc"};
-    }
-    
-    @Override
-    protected void initQueryProps(Map<String, ViewProperty<?>> queryPropMap, String viewId) {
-        super.initQueryProps(queryPropMap, viewId); 
-    }
+	@Override
+	protected void initCreate(Album album) {
+		super.initCreate(album);
+	}
+
+	@Override
+	protected void initServiceFilters(List<IServiceFilter> filters) {
+		filters.add(new IdServiceFilter<Long, Album>(tableName));// 为了主键生成
+	}
+
+	// -------------------------------- 以下为增删改查表单元数据配置
+	// -------------------------------- //
+	@Override
+	protected String[] collectQueryProps() {
+		return new String[] { "id" };
+	}
+
+	@Override
+	protected String[] collectInputProps() {
+		return new String[] { "id", "name", "onlySelf", "desc" };
+	}
+
+	@Override
+	protected void initQueryProps(Map<String, ViewProperty<?>> queryPropMap, String viewId) {
+		super.initQueryProps(queryPropMap, viewId);
+	}
 
 	@Override
 	protected void initInputProps(Map<String, ViewProperty<?>> inputPropMap, String viewId) {
 		super.initInputProps(inputPropMap, viewId);
 	}
-		
-    @Override
-    protected void initPropMapInner(List<ViewProperty<?>> props) {
-        ViewProperty<?> prop = null;        
-        
-		prop = new ViewProperty<Object>(new BaseField("id", "编号", "Long"), null);    
-    	props.add(prop);
-        
-		prop = new ViewProperty<Object>(new BaseField("name", "name", "String"), null);
-    	props.add(prop);
-        
+
+	@Override
+	protected void initPropMapInner(List<ViewProperty<?>> props) {
+		ViewProperty<?> prop = null;
+
+		prop = new ViewProperty<Object>(new BaseField("id", "编号", "Long"), null);
+		props.add(prop);
+
+		prop = new ViewProperty<Object>(new WriteField("name", "name", "String", "相册名称", true), null);
+		props.add(prop);
+
 		prop = new ViewProperty<Object>(new BaseField("onlySelf", "onlySelf", "Integer"), null);
-    	props.add(prop);
-        
+		props.add(prop);
+
 		prop = new ViewProperty<Object>(new BaseField("desc", "desc", "String"), null);
-    	props.add(prop);
-        
+		props.add(prop);
+
 		prop = new ViewProperty<Object>(new BaseField("status", "status", "Integer"), null);
-    	props.add(prop);
-        
+		props.add(prop);
+
 		prop = new ViewProperty<Object>(new BaseField("createdBy", "createdBy", "Long"), null);
-    	props.add(prop);
-        
+		props.add(prop);
+
 		prop = new ViewProperty<Object>(new BaseField("createdDate", "createdDate", "Date"), null);
-    	props.add(prop);
-        
+		props.add(prop);
+
 		prop = new ViewProperty<Object>(new BaseField("updatedBy", "updatedBy", "Long"), null);
-    	props.add(prop);
-        
+		props.add(prop);
+
 		prop = new ViewProperty<Object>(new BaseField("updatedDate", "updatedDate", "Date"), null);
-    	props.add(prop);
-    }
-    
-    @Override
-    public String getDsType() {
-        return super.getDsType();
-    }
-    
+		props.add(prop);
+	}
+
 }

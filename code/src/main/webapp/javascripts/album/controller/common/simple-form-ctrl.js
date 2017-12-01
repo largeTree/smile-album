@@ -1,9 +1,13 @@
-angular.module('album').controller('SimpleFormController', function($scope, $modalInstance, config, checkFunc) {
+angular.module('album').controller('SimpleFormController', function($scope, $modalInstance, ApiHelper, config) {
     $scope.config = config;
     $scope.jsonParam = {};
 
     $scope.submit = function() {
-        console.info($scope.jsonParam);
+        ApiHelper.saveForm(config.apiKey, {}, $scope.jsonParam).then(function(data){
+        	if(data.code == 0) {
+        		$modalInstance.close('ok');
+        	}
+        });
     }
 
     $scope.close = function() {
