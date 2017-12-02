@@ -1,0 +1,23 @@
+/* 主背景色 */
+
+.album-main-bg-color {
+    background-color: #F5F5DC;
+}
+
+/*
+	注册页背景色
+*/
+
+.album-register-bg-color {}
+
+/*
+	必填标记
+*/
+
+.lq-must-input {
+    color: red;
+}
+
+.lq-jcaptcha-container {
+    border: 1px #CCCCCC solid;
+}
