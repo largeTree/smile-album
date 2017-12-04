@@ -25,8 +25,8 @@ CREATE TABLE `album` (
 	`cover` VARCHAR(1024) DEFAULT '' COMMENT'相册封面', 
 	`created_by` INT(11) NOT NULL COMMENT'创建人',
 	`created_date` DATETIME NOT NULL COMMENT'创建时间',
-	`updated_by` INT(11) NOT NULL COMMENT'更新时间',
-	`updated_date` DATETIME NOT NULL COMMENT'更新时间'
+	`updated_by` INT(11) NULL COMMENT'更新时间',
+	`updated_date` DATETIME NULL COMMENT'更新时间'
 );
 
 -- 创建角色表
