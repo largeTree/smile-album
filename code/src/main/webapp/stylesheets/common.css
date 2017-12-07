@@ -14,10 +14,10 @@
 	必填标记
 */
 
-.lq-must-input {
+.sm-must-input {
     color: red;
 }
 
-.lq-jcaptcha-container {
+.sm-jcaptcha-container {
     border: 1px #CCCCCC solid;
 }

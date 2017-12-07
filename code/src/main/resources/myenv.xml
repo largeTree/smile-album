@@ -6,7 +6,7 @@
 	<istest>false</istest>
 	<!-- 是否使用本地内存 -->
 	<islocal>false</islocal>
-	<isdebug>false</isdebug>
+	<isdebug>true</isdebug>
 	<!-- standalone(默认单机版,为了开发方便） sentinel(哨兵,线上高可用版) -->
 	<mc_type>redis</mc_type>
 	<mc_redis_pool_type>standalone</mc_redis_pool_type>

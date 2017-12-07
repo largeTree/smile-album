@@ -1,4 +1,4 @@
-.lq-login-container {
+.sm-login-container {
 	position: absolute;
 	top: 30%;
 	right: 15%;
@@ -9,7 +9,7 @@
     padding: 1%;
 }
 
-.lq-login-error {
+.sm-login-error {
 	text-align: center;
     height: 30px;
     line-height: 30px;

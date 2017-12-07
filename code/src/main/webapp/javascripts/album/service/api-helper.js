@@ -88,11 +88,25 @@ angular.module('album').factory('ApiHelper', function($rootScope, $q, $http, App
         return defer.promise;
     }
 
+    /**
+     * 根据主键获取bean
+     */
+    var queryForm0 = function(apiKey, pk, wrapper) {
+        var defer = $q.defer();
+        post0(apiKey, { id: pk, wrapper: wrapper }).then(function(data) {
+            defer.resolve(data.data);
+        }, function(e) {
+            defer.reject(e);
+        });
+        return defer.promise;
+    }
+
     return {
         call: call0,
         post: post0,
         queryList: queryList0,
-        saveForm: saveForm0
+        saveForm: saveForm0,
+        queryForm: queryForm0
     };
 
 });

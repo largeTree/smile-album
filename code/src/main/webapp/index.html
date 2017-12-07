@@ -4,52 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Smile</title>
-
     <!-- 第三方样式库 -->
     <link rel="stylesheet" href="./stylesheets/bootstrap.min-3.3.4.css">
-
+    <link rel="stylesheet" href="./stylesheets/thirdparty/css/font-awesome.min.css">
     <!-- 基础样式库 -->
     <link rel="stylesheet" href="./stylesheets/fdn.css">
     <link rel="stylesheet" href="./stylesheets/loading.css">
     <link rel="stylesheet" href="./stylesheets/common.css">
-
     <!-- 具体个性化样式 -->
     <link rel="stylesheet" href="./stylesheets/album.css">
     <link rel="stylesheet" href="./stylesheets/navbar.css">
     <link rel="stylesheet" href="./stylesheets/register.css">
     <link rel="stylesheet" href="./stylesheets/login.css">
-
     <!-- 第三方js库 -->
     <script type="text/javascript" src="./javascripts/angular/angularjs-1.4.6.js"></script>
     <script type="text/javascript" src="./javascripts/angular/angular-route.js"></script>
     <script type="text/javascript" src="./javascripts/angular/ui-bootstrap-tpls.js"></script>
     <script type="text/javascript" src="./javascripts/angular/angular-cookies.js"></script>
-
     <!-- 程序入口 -->
     <script type="text/javascript" src="./javascripts/album/app.js"></script>
-
     <!-- 自定义指令 -->
     <!-- 相册容器模版 -->
     <script type="text/javascript" src="./javascripts/album/directives/album-container/album-container-dir.js"></script>
-
     <!-- 通用服务 -->
     <script type="text/javascript" src="./javascripts/album/service/common-svc.js"></script>
     <script type="text/javascript" src="./javascripts/album/service/api-helper.js"></script>
     <script type="text/javascript" src="./javascripts/album/controller/common/message-common-modal-ctrl.js"></script>
     <script type="text/javascript" src="./javascripts/album/controller/common/simple-form-ctrl.js"></script>
-
     <!-- 相册通用服务 -->
     <script type="text/javascript" src="./javascripts/album/service/album/album-comm-svc.js"></script>
-    
     <!-- 入口界面控制器 -->
     <script type="text/javascript" src="./javascripts/album/controller/entry-ctrl.js"></script>
-
     <!-- 授权业务控制 -->
     <script type="text/javascript" src="./javascripts/album/controller/auth/register-ctrl.js"></script>
     <script type="text/javascript" src="./javascripts/album/controller/auth/login-ctrl.js"></script>
-
     <!-- 我的相册控制器 -->
-    <script type="text/javascript" src="./javascripts/album/controller/albums-ctrl.js"></script>
+    <script type="text/javascript" src="./javascripts/album/controller/album/albums-ctrl.js"></script>
+    <script type="text/javascript" src="./javascripts/album/controller/album/album-detail-ctrl.js"></script>
     <style type="text/css">
     /* 设置滚动条的样式 */
 
@@ -92,7 +83,7 @@
                     <p class="navbar-text "></p>
                 </div>
                 <!-- 登录/注册 -->
-                <div class="lq-nav-login-info navbar-right btn-toolbar" ng-if="!isOnline">
+                <div class="sm-nav-login-info navbar-right btn-toolbar" ng-if="!isOnline">
                     <a type="button" class="btn navbar-btn btn-default" href="#/login">Sign in</a> <a type="button" class="btn navbar-btn btn-info" href="#/reg">sign up</a>
                 </div>
                 <div class="navbar-right">
@@ -102,8 +93,8 @@
                 <div class="navbar-right">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{session.name || '用户名'}}
-								<span class="caret"></span>
-						</a>
+                                <span class="caret"></span>
+                        </a>
                             <ul class="dropdown-menu">
                                 <li><a href="#/">个人信息</a></li>
                                 <li><a href="#/albums">我的相册</a></li>
@@ -115,7 +106,7 @@
                     <p class="navbar-text "></p>
                 </div>
                 <!-- 搜索框 -->
-                <div class="lq-nav-search-form">
+                <div class="sm-nav-search-form">
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Search">
