@@ -84,7 +84,8 @@
                 </div>
                 <!-- 登录/注册 -->
                 <div class="sm-nav-login-info navbar-right btn-toolbar" ng-if="!isOnline">
-                    <a type="button" class="btn navbar-btn btn-default" href="#/login">Sign in</a> <a type="button" class="btn navbar-btn btn-info" href="#/reg">sign up</a>
+                    <a type="button" class="btn navbar-btn btn-default" href="#/login">Sign in</a>
+                    <a type="button" class="btn navbar-btn btn-info" href="#/reg">sign up</a>
                 </div>
                 <div class="navbar-right">
                     <p class="navbar-text "></p>
@@ -106,7 +107,7 @@
                     <p class="navbar-text "></p>
                 </div>
                 <!-- 搜索框 -->
-                <div class="sm-nav-search-form">
+                <div ng-show="false" class="sm-nav-search-form">
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Search">

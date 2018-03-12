@@ -22,3 +22,18 @@
     border: 1px #CCCCCC solid;
 }
 
+.right-back-btn {
+	float: right;
+	font-size: 20px;
+	color: #87CEFA;
+	border:1px solid #87CEFA;
+	border-radius: 5px;
+	padding: 4px;
+	line-height: 24px;
+	letter-spacing:2px;
+	cursor: pointer;
+}
+
+.right-back-btn:hover {
+	border:1px solid #FFFFFF;
+}

@@ -25,6 +25,10 @@ import com.qiuxs.bizfdn.frm.bean.ViewIndex;
 import com.qiuxs.bizfdn.frm.bean.ViewProperty;
 import com.qiuxs.bizfdn.frm.bean.WriteField;
 import com.qiuxs.bizfdn.frm.service.AbstractService;
+import com.qiuxs.fdn.Constant;
+import com.qiuxs.fdn.exception.utils.ExceptionUtil;
+import com.qiuxs.fdn.utils.NumberUtils;
+import com.qiuxs.frm.context.UserContext;
 import com.qiuxs.frm.service.filter.IServiceFilter;
 import com.qiuxs.frm.service.impl.IdServiceFilter;
 
@@ -57,6 +61,16 @@ public class AlbumService extends AbstractService<Long, Album, AlbumDao>
 	@Override
 	public AlbumDao getDao() {
 		return albumDao;
+	}
+
+	@Override
+	public Album get(Long pkObj) {
+		Album album = super.get(pkObj);
+		// 禁止访问非本人创建且非公开的相册
+		if (album.getOnlySelf() == Constant.TRUE && NumberUtils.compareTo(album.getCreatedBy(), UserContext.getUserLite().getUserId()) != 0) {
+			ExceptionUtil.throwLogicalException("album_access_denied");
+		}
+		return album;
 	}
 
 	@Override

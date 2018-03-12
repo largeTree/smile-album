@@ -1,10 +1,12 @@
 package com.qiuxs.thirdparty.upyun;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 
 import com.qiuxs.core.context.EnvironmentHolder;
 import com.qiuxs.fdn.Constant;
 import com.qiuxs.fdn.utils.security.MD5Util;
+import com.qiuxs.fdn.utils.security.SecurityUtil;
 
 /**
  * 又拍云帮助类
@@ -12,6 +14,8 @@ import com.qiuxs.fdn.utils.security.MD5Util;
  *
  */
 public class UpYunHelper {
+
+	public static final String Authorization_PREFIX = "UPYUN";
 
 	public static final String METHOD_HEAD = "HEAD";
 	public static final String METHOD_GET = "GET";
@@ -54,6 +58,35 @@ public class UpYunHelper {
 	 */
 	public static String getBucket() {
 		return EnvironmentHolder.getEnvParam("upyun_bucket");
+	}
+
+	/**
+	 * 生成Authorization 
+	 * @param method
+	 * @param uri
+	 * @param date
+	 * @param contentMd5
+	 * @return
+	 */
+	public static String getAuthorization(String method, String uri, String date, String contentMd5) {
+		return Authorization_PREFIX + " " + getOperator() + ":" + getSignature(method, uri, date, contentMd5);
+	}
+
+	/**
+	 * 生成签名
+	 * @param method
+	 * @param uri
+	 * @param date
+	 * @param contentMd5
+	 * @return
+	 */
+	private static String getSignature(String method, String uri, String date, String contentMd5) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(method).append("&").append(uri).append("&").append(date);
+		if (StringUtils.isNotBlank(contentMd5)) {
+			sb.append("&").append(contentMd5);
+		}
+		return Base64.encodeBase64String(SecurityUtil.hmacSHA1EncryptBytes(getPasswordMd5(), sb.toString()));
 	}
 
 	/**

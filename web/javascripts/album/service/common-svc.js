@@ -97,6 +97,7 @@ angular.module('album').factory('CommonSvc', function($rootScope, $q, $modal, $h
      */
     var msg0 = function(title, text, delay) {
         var deferred = $q.defer();
+        delay = delay || 800;
         var confirmModal = $modal.open({
             templateUrl: 'tpls/common/modals/alert-modal.html',
             size: 'sm',

@@ -22,6 +22,7 @@ import com.qiuxs.album.biz.dao.AlbumDao;
 import com.qiuxs.album.biz.entity.Album;
 import com.qiuxs.album.biz.service.AlbumService;
 import com.qiuxs.bizfdn.frm.action.BaseAction;
+import com.qiuxs.fdn.Constant;
 import com.qiuxs.fdn.bean.ActionResult;
 import com.qiuxs.fdn.utils.converter.JsonUtils;
 import com.qiuxs.frm.action.ActionConstants;
@@ -61,7 +62,7 @@ public class AlbumAction extends BaseAction<Long, Album, AlbumDao, AlbumService>
 	 * @return
 	 */
 	public ActionResult publicList(Map<String, String> params) {
-		params.put("onlySelf", "0");
+		params.put("onlySelf", Constant.FALSE_STR);
 		params.put("createdByOr", String.valueOf(UserContext.getUserIdOpt()));
 		return super.list(params, null);
 	}
@@ -72,7 +73,7 @@ public class AlbumAction extends BaseAction<Long, Album, AlbumDao, AlbumService>
 	 * @return
 	 */
 	public ActionResult privateList(Map<String, String> params) {
-		params.put("onlySelf", "1");
+		params.put("onlySelf", Constant.FALSE_STR);
 		params.put("createdByOr", String.valueOf(UserContext.getUserIdOpt()));
 		return super.list(params, null);
 	}

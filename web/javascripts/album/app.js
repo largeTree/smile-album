@@ -1,7 +1,9 @@
 angular.module('album', ['ngRoute', 'ui.bootstrap', 'ngCookies'])
 
     .constant('AppConfig', {
-        'baseUrl': 'http://www.qiuxs.com:8090/album/',
+        'baseUrl': 'http://127.0.0.1:8080/album/',
+        // 'baseUrl': 'http://www.qiuxs.com:8090/album/',
+        'DocServer' : 'v0.api.upyun.com',
         'defPageSize': '15'
     }).constant('ApiKeyConst', {
         checkUserExists: 'sm-auth-user-check-exists',
@@ -60,6 +62,7 @@ angular.module('album', ['ngRoute', 'ui.bootstrap', 'ngCookies'])
             $cookies.remove('lq_user_session');
             $rootScope.isOnline = false;
             $location.path('/');
+            location.reload();
         }
 
         $rootScope.isOnline = false;

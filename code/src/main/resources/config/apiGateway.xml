@@ -13,6 +13,6 @@
 		<api id="sm-album-getById" bean="AlbumAction" method="getById" login="0" auth="0" />
 	</module>
 	<module id="sm-upauth">
-		<api id="sm-get-up-get-policy" bean="UpYunAuthAction" method="getPolicyAndSignature" login="0" auth="0" />
+		<api id="sm-upyun-get-authorization" bean="UpYunAuthAction" method="getAuthorization" login="1" auth="0" />
 	</module>
 </apiGateway>

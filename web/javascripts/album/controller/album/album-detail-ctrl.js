@@ -5,6 +5,11 @@ angular.module('album').controller('AlbumDetailController', function($scope, $lo
     	$scope.album = data;
     });
 
-    
+    $scope.waitUploadFiles = new Array();
+
+    $scope.doUpload = function(){
+    	var file = document.getElementById('file_asset').files[0];
+    	$scope.waitUploadFiles.push(file);
+    }
 
 });

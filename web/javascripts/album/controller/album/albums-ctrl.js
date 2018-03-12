@@ -2,7 +2,7 @@ angular.module('album').controller('MyAlbumsController', function($rootScope, $s
     //  $rootScope.pageStyle = 'album-register-bg-color';
     $rootScope.loading = true;
     if (!$rootScope.isOnline) {
-        CommonSvc.msg('Wran', '请先登录!', 500).then(function() {});
+        CommonSvc.msg('Wran', '请先登录!').then(function() {});
         $location.path('/login');
         $rootScope.loading = false;
         return;
