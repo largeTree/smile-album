@@ -1,0 +1,21 @@
+<div style="padding: 20px 30px;">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="close()"><span aria-hidden="true">&times;</span></button>
+    <div class="page-header">
+        <h1><small>{{config.title}}</small></h1>
+    </div>
+    <div class="container-fluid">
+        <form class="form-horizontal" name="regForm" novalidate>
+            <div class="row form-group" ng-repeat="field in config.fields">
+                <label for="{{field.fieldName}}" class="col-sm-3 control-label">{{field.label}}<span class="sm-must-input" ng-if="field.required">*</span></label>
+                <div class="col-sm-6">
+                    <input type="{{field.type}}" ng-class="{'form-control':field.type != 'checkbox'}" name="loginId" id="{{field.fieldName}}" ng-model="jsonParam[field.fieldName]" placeholder="{{field.placeholder}}">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-12" style="text-align: center;">
+                    <button type="button" class="btn btn-info" ng-click="submit()">保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

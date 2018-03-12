@@ -1,0 +1,23 @@
+.ec-center {
+	text-align: center;
+}
+
+.ec-right {
+	text-align: right;
+}
+
+.ec-padding-20 {
+	padding: 20px;
+}
+
+.ec-hidden {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	word-break: keep-all;
+}
+
+input {
+	border: 1px #ccc solid;
+	border-radius: 3px;
+}

@@ -1,0 +1,9 @@
+.sm-register-container {
+	margin: 0% 20%;
+	height: 100%;
+}
+
+.err-msg {
+	color: red;
+	font-weight: bold;
+}

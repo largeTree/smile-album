@@ -1,0 +1,19 @@
+.sm-login-container {
+	position: absolute;
+	top: 30%;
+	right: 15%;
+    width: 350px;
+    height: 300px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 1%;
+}
+
+.sm-login-error {
+	text-align: center;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px;
+    color: red;
+    font-weight: bold
+}
