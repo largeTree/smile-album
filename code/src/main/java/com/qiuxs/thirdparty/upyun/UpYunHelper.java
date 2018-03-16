@@ -1,10 +1,14 @@
 package com.qiuxs.thirdparty.upyun;
 
+import java.nio.charset.Charset;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 
+import com.alibaba.fastjson.JSONObject;
 import com.qiuxs.core.context.EnvironmentHolder;
 import com.qiuxs.fdn.Constant;
+import com.qiuxs.fdn.bean.Pair;
 import com.qiuxs.fdn.utils.security.MD5Util;
 import com.qiuxs.fdn.utils.security.SecurityUtil;
 
@@ -20,6 +24,7 @@ public class UpYunHelper {
 	public static final String METHOD_HEAD = "HEAD";
 	public static final String METHOD_GET = "GET";
 	public static final String METHOD_PUT = "PUT";
+	public static final String METHOD_POST = "POST";
 	public static final String METHOD_DELETE = "DELETE";
 
 	/** 密码Md5值 */
@@ -61,6 +66,27 @@ public class UpYunHelper {
 	}
 
 	/**
+	 * 生成参数清单
+	 * @param bucket
+	 * @param saveKey
+	 * @param expiration
+	 * @param date
+	 * @return
+	 */
+	public static String getPolicy(String bucket, String saveKey, String expiration, String date, String contentMd5) {
+		JSONObject params = new JSONObject();
+		params.put("bucket", bucket);
+		params.put("save-key", saveKey);
+		params.put("expiration", expiration);
+		params.put("date", date);
+		if (contentMd5 != null) {
+			params.put("content-md5", contentMd5);
+		}
+		String jsonString = params.toJSONString();
+		return Base64.encodeBase64String(jsonString.getBytes(Charset.forName(Constant.UTF8)));
+	}
+
+	/**
 	 * 生成Authorization 
 	 * @param method
 	 * @param uri
@@ -68,8 +94,8 @@ public class UpYunHelper {
 	 * @param contentMd5
 	 * @return
 	 */
-	public static String getAuthorization(String method, String uri, String date, String contentMd5) {
-		return Authorization_PREFIX + " " + getOperator() + ":" + getSignature(method, uri, date, contentMd5);
+	public static String getAuthorization(String method, String uri, String date, String policy, String contentMd5) {
+		return Authorization_PREFIX + " " + getOperator() + ":" + getSignature(method, uri, date, policy, contentMd5);
 	}
 
 	/**
@@ -80,13 +106,13 @@ public class UpYunHelper {
 	 * @param contentMd5
 	 * @return
 	 */
-	private static String getSignature(String method, String uri, String date, String contentMd5) {
+	private static String getSignature(String method, String uri, String date, String policy, String contentMd5) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(method).append("&").append(uri).append("&").append(date);
+		sb.append(method).append("&").append(uri).append("&").append(date).append("&").append(policy);
 		if (StringUtils.isNotBlank(contentMd5)) {
 			sb.append("&").append(contentMd5);
 		}
-		return Base64.encodeBase64String(SecurityUtil.hmacSHA1EncryptBytes(getPasswordMd5(), sb.toString()));
+		return Base64.encodeBase64String(SecurityUtil.hmacSHA1EncryptBytes(sb.toString(), getPasswordMd5()));
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package com.qiuxs.thirdparty.upyun.action;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -21,17 +22,24 @@ public class UpYunAuthAction {
 	 */
 	public ActionResult getAuthorization(Map<String, String> params) {
 		Long albumId = MapUtils.getLongValueMust(params, "albumId");
-		String fileName = MapUtils.getString(params, "fileName");
 		Long userId = UserContext.getUserLite().getUserId();
+		
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.HOUR_OF_DAY, -8);
+		String date = DateFormatUtils.format(cal.getTime(), "EEE, dd MMM yyyy HH:mm:ss 'GMT'", Locale.US);
+		System.out.println(date);
+		String saveKey = userId + "/" + albumId + "/" + "{filename}-{year}-{mon}-{day}-{hour}:{min}:{sec}{.suffix}";
+		// 延迟到30分钟之后
+		// 过期时间
+		String expiration = String.valueOf(cal.getTimeInMillis() + (30 * 60 * 1000));
+		// 参数清单
+		String policy = UpYunHelper.getPolicy(UpYunHelper.getBucket(), saveKey, expiration, date, null);
+		// 目标服务
+		String uri = UpYunHelper.getBucket();
+		String authorization = UpYunHelper.getAuthorization(UpYunHelper.METHOD_POST, "/" + uri, date, policy, null);
 
-		String uri = userId + "/" + albumId + "/" + fileName;
-		String date = DateFormatUtils.format(new Date(), DateFormatUtils.RFC1123_PATTERN);
-
-		String authorization = UpYunHelper.getAuthorization(UpYunHelper.METHOD_PUT, uri, date, null);
-
-		Map<String, Object> data = MapUtils.genMap("authorization", authorization, "uri", uri);
+		Map<String, Object> data = MapUtils.genMap("authorization", authorization, "bucket", UpYunHelper.getBucket(), "policy", policy);
 
 		return new ActionResult(data);
 	}
-
 }

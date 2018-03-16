@@ -82,6 +82,7 @@ public class LoginAction {
 		data.put("loginId", user.getLoginId());
 		data.put("name", user.getName());
 		data.put("sign", user.getSign());
+		data.put("id", user.getId());
 		data.put(DefaultApiGatewayController.SESSIONID_KEY, session.getSessionId());
 	}
 

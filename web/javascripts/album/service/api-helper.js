@@ -48,9 +48,7 @@ angular.module('album').factory('ApiHelper', function($rootScope, $q, $http, App
             if (data.code == 0) {
                 defer.resolve(data);
             } else if (!angular.isUndefined(data.code)) {
-                CommonSvc.alert('Error', data.msg).then(function() {
-                    defer.reject(data);
-                });
+                defer.reject(data);
             }
         }, function(e) {
             defer.reject(e);
@@ -68,7 +66,9 @@ angular.module('album').factory('ApiHelper', function($rootScope, $q, $http, App
         post0(apiKey, params).then(function(data) {
             defer.resolve(data.data);
         }, function(e) {
-            defer.reject(e);
+            CommonSvc.alert('Error', e.msg).then(function() {
+                defer.reject(e);
+            });
         });
         return defer.promise;
     }
@@ -83,7 +83,9 @@ angular.module('album').factory('ApiHelper', function($rootScope, $q, $http, App
             CommonSvc.msg('Info', data.msg);
             defer.resolve(data);
         }, function(e) {
-            defer.reject(e);
+            CommonSvc.alert('Error', e.msg).then(function() {
+                defer.reject(e);
+            });
         });
         return defer.promise;
     }
@@ -96,7 +98,35 @@ angular.module('album').factory('ApiHelper', function($rootScope, $q, $http, App
         post0(apiKey, { id: pk, wrapper: wrapper }).then(function(data) {
             defer.resolve(data.data);
         }, function(e) {
-            defer.reject(e);
+            CommonSvc.alert('Error', e.msg).then(function() {
+                defer.reject(e);
+            });
+        });
+        return defer.promise;
+    }
+
+    var sendFormData0 = function(url, method, formData, headers) {
+        var defer = $q.defer();
+        $http({
+            method: method,
+            url: url,
+            data: formData,
+            headers: headers,
+            cache: false,
+            timeout: 20000
+        }).success(function(data, status, headers, config) {
+            defer.resolve(data);
+        }).error(function(data, status, headers, config) {
+            $rootScope.loading = false;
+            if (data == null) {
+                CommonSvc.alert('Error', '请求超时').then(function() {
+                    defer.reject({
+                        code: -1,
+                        msg: '请求超时'
+                    });
+                });
+            }
+            defer.reject(data);
         });
         return defer.promise;
     }
@@ -106,7 +136,8 @@ angular.module('album').factory('ApiHelper', function($rootScope, $q, $http, App
         post: post0,
         queryList: queryList0,
         saveForm: saveForm0,
-        queryForm: queryForm0
+        queryForm: queryForm0,
+        sendFormData: sendFormData0
     };
 
 });

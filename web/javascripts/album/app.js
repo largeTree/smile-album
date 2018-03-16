@@ -3,7 +3,8 @@ angular.module('album', ['ngRoute', 'ui.bootstrap', 'ngCookies'])
     .constant('AppConfig', {
         'baseUrl': 'http://127.0.0.1:8080/album/',
         // 'baseUrl': 'http://www.qiuxs.com:8090/album/',
-        'DocServer' : 'v0.api.upyun.com',
+        'UpYunDomain' : 'http://v0.api.upyun.com',
+        'bucket' : 'qiuxs-test',
         'defPageSize': '15'
     }).constant('ApiKeyConst', {
         checkUserExists: 'sm-auth-user-check-exists',
@@ -12,7 +13,8 @@ angular.module('album', ['ngRoute', 'ui.bootstrap', 'ngCookies'])
         privateAlbum: 'sm-album-list-private',
         publicAlbum: 'sm-album-list-public',
         createAlbum: 'sm-album-create',
-        getAlbumById: 'sm-album-getById'
+        getAlbumById: 'sm-album-getById',
+        genAuthorization : 'sm-upyun-get-authorization'
     }).config(function($routeProvider, $httpProvider) {
         $routeProvider.when('/', {
             templateUrl: 'tpls/entry.html',

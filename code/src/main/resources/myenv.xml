@@ -18,7 +18,9 @@
 	<!-- 操作员 -->
 	<upyun_operator>qiuxs</upyun_operator>
 	<!-- 操作员密码 -->
-	<upyun_password>Qiu1162796928</upyun_password>
+	<upyun_password>qiuxs1162</upyun_password>
 	<!-- 服务名 -->
 	<upyun_bucket>qiuxs-test</upyun_bucket>
+	
+	<upyun_domain>http://qiuxs-test.b0.upaiyun.com</upyun_domain>
 </system>

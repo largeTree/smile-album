@@ -5,14 +5,9 @@
     	<span class="right-back-btn" onclick="window.history.go(-1)"><i class="icon-arrow-left">返回</i></span>
     </h1>
     <div class="btn-group" role="group" aria-label="...">
-        <button type="button" class="btn btn-info"><i class="icon-cloud-upload">&nbsp;&nbsp;上传照片</i></button>
+        <button type="button" ng-show="session.id == album.createdBy" class="btn btn-info" ng-click="showUploadModal()"><i class="icon-cloud-upload">&nbsp;&nbsp;上传照片</i></button>
     </div>
 </div>
 <div class="albm-info">
-    <input type="file" ng-change="addFileToWait(this)" name="image" id="file_asset" ng-model="params.file">
-    <button ng-click="doUpload()">上传</button>
-    <hr />
-    <ul>
-        <li ng-repeat="file in waitUploadFiles">{{file.name}}</li>
-    </ul>
+    
 </div>

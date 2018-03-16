@@ -1,0 +1,28 @@
+<div style="padding:0px 20px 10px 20px;">
+    <div class="page-header">
+        <h1>
+	    	{{album.name}}
+	    	<small>&nbsp;&nbsp;—&nbsp;—&nbsp;&nbsp;{{album.desc}}</small>
+	    	<button type="button" class="close" aria-label="Close" ng-click="close()"><span aria-hidden="true">&times;</span></button>
+    	</h1>
+        <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-info" ng-click="doUpload()"><i class="icon-cloud-upload">&nbsp;&nbsp;上&nbsp;传</i></button>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="wait-up-img" ng-mouseenter="showRemoveBtn($index)" ng-mouseleave="hideRemoveBtn($index)" ng-repeat="img in waitUploadImgs">
+        	<span ng-show="removeBtnSatus[$index]" ng-click="removeImg($index)" class="wait-img-remove-btn"><i class="icon-remove"></i></span>
+            <img width="100%" height="100%" src="{{img.src}}">
+        </div>
+        <div ng-show="waitUploadImgs.length < 8" class="wait-up-img img-select-btn" ng-click="openFileSelect()">
+            <div style="background-color: #FFF;width: 100%;height: 100%;">
+                <i class="icon-cloud-upload" style="background-color: #FFF;"></i>
+            </div>
+        </div>
+    </div>
+    <div style="display: none;">
+        <form id="file_asset_form" enctype="multipart/form-data">
+        	<input type="file" id="file_asset" onchange="angular.element(this).scope().addFileToWait(this)">
+        </form>
+    </div>
+</div>
