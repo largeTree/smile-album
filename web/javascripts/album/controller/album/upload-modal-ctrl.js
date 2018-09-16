@@ -4,59 +4,48 @@ angular.module('album').controller('AlbumUploadModalController', function($rootS
     $scope.waitUploadFiles = new Array();
     $scope.waitUploadImgs = new Array();
     $scope.removeBtnSatus = new Array();
+    $scope.uploadProgress = new Array();
 
     $scope.doUpload = function() {
         if (!hasImage()) {
             CommonSvc.msg('提示', '请先点击下方按钮选择图片');
             return;
         }
-        angular.forEach($scope.waitUploadFiles, function(item) {
-            ApiHelper.post(ApiKeyConst.genAuthorization, { albumId: $scope.album.id }).then(function(data) {
+        angular.forEach($scope.waitUploadFiles, function(item, index) {
+            var albumId = $scope.album.id;
+            ApiHelper.post(ApiKeyConst.genAuthorization, { albumId: albumId }).then(function(data) {
                 data = data.data;
                 var formData = new FormData(document.getElementById('file_asset_form'));
-                formData.append('policy',data.policy);
+                formData.append('policy', data.policy);
                 formData.append('authorization', data.authorization);
                 formData.append('file', item);
-                // var headers = {
-                //     'Content-Type': 'multipart/form-data'
-                // };
-                // ApiHelper.sendFormData(AppConfig.UpYunDomain + '/' + data.bucket, 'post', formData, headers).then(function(data) {
-                //     console.log('上传成功');
-                //     console.log(data);
-                // }, function(e) {
-                //     console.log('上传失败');
-                //     console.log(e);
-                // });
+
+                var startTime = 0;
                 var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {
-                	console.log(xhr.responseText);
-                }
                 xhr.onload = function(evt) {
-                	// 请求完成方法
+                    // 请求完成方法
+                    var res = JSON.parse(evt.target.responseText);
                 }
-                xhr.upload.onprogress = function(evt){
-                	// 进度方法
-                	evt.total;
-                	evt.loaded
+                xhr.upload.onprogress = function(evt) {
+                    // 进度方法
+                    updateProgress(index, evt.total, evt.loaded);
                 }
-                xhr.upload.onloadstart = function(evt){
+                xhr.upload.onloadstart = function(evt) {
 
                 }
-                xhr.open('POST','http://v0.api.upyun.com/qiuxs-test',true);
-                // xhr.setRequestHeader('Content-Type','multipart/form-data');
+                xhr.open('POST', 'http://v0.api.upyun.com/qiuxs-test', true);
+                startTime = new Date().getTime();
                 xhr.send(formData);
             });
         });
     }
 
-    $scope.addFileToWait = function(input) {
-        var file = input.files[0];
+    $scope.addFileToWait = function(file) {
+        // var file = input.files[0];
         $scope.waitUploadFiles.push(file);
-        appendImg(file, $scope.waitUploadFiles.length - 1);
-    }
-
-    $scope.openFileSelect = function() {
-        document.getElementById('file_asset').click();
+        var index = $scope.waitUploadFiles.length - 1;
+        appendImg(file, index);
+        initProgress(index);
     }
 
     /**
@@ -65,10 +54,35 @@ angular.module('album').controller('AlbumUploadModalController', function($rootS
     var appendImg = function(file, index) {
         var reader = new FileReader();
         reader.onload = function() {
-            $scope.waitUploadImgs[index] = { src: reader.result };
-            $scope.$apply();
+            $scope.$apply(function() {
+                $scope.waitUploadImgs[index] = { src: reader.result };
+            });
         }
         reader.readAsDataURL(file);
+    }
+
+    /**
+     * 添加一个进度条
+     */
+    var initProgress = function(index) {
+        $scope.uploadProgress[index] = {
+            started: false, // 是否开始
+            progress: 0 // 进度
+            // speed: 0, // 速度
+            // speedUnit: 'b/s', // 速度单位
+            // surplus: 0 // 剩余时间
+        };
+    }
+
+    /**
+     * 更新进度
+     */
+    var updateProgress = function(index, total, loaded) {
+        var progress = $scope.uploadProgress[index];
+        progress.started = true;
+        progress.progress = Math.round((loaded / total) * 100, 2);
+        // console.log('progress.progress' + progress.progress);
+        $scope.$apply();
     }
 
     $scope.removeImg = function(index) {

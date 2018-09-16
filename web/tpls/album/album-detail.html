@@ -5,7 +5,7 @@
     	<span class="right-back-btn" onclick="window.history.go(-1)"><i class="icon-arrow-left">返回</i></span>
     </h1>
     <div class="btn-group" role="group" aria-label="...">
-        <button type="button" ng-show="session.id == album.createdBy" class="btn btn-info" ng-click="showUploadModal()"><i class="icon-cloud-upload">&nbsp;&nbsp;上传照片</i></button>
+        <button type="button" ng-hide="session.id != album.createdBy" class="btn btn-info" ng-click="showUploadModal()"><i class="icon-cloud-upload">&nbsp;&nbsp;上传照片</i></button>
     </div>
 </div>
 <div class="albm-info">

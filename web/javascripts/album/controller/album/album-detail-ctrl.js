@@ -1,6 +1,8 @@
 angular.module('album').controller('AlbumDetailController', function($scope, $location, $modal, ApiHelper, ApiKeyConst) {
     var searchParams = $location.search();
-
+    $scope.album = {
+        createdBy: -1
+    };
     ApiHelper.queryForm(ApiKeyConst.getAlbumById, searchParams.pk, true).then(function(data) {
         $scope.album = data;
     });

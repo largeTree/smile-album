@@ -11,10 +11,13 @@
     </div>
     <div class="container-fluid">
         <div class="wait-up-img" ng-mouseenter="showRemoveBtn($index)" ng-mouseleave="hideRemoveBtn($index)" ng-repeat="img in waitUploadImgs">
-        	<span ng-show="removeBtnSatus[$index]" ng-click="removeImg($index)" class="wait-img-remove-btn"><i class="icon-remove"></i></span>
+            <span ng-show="removeBtnSatus[$index]" ng-click="removeImg($index)" class="wait-img-remove-btn"><i class="icon-remove"></i></span>
             <img width="100%" height="100%" src="{{img.src}}">
+            <div ng-show="uploadProgress[$index].started" class="cover-up" style="height: {{uploadProgress[$index].progress}}%;">
+            </div>
+            <div ng-show="uploadProgress[$index].started" class="progress-text"><span>{{uploadProgress[$index].progress}}%</span></div>
         </div>
-        <div ng-show="waitUploadImgs.length < 8" class="wait-up-img img-select-btn" ng-click="openFileSelect()">
+        <div ng-show="waitUploadImgs.length < 8" class="wait-up-img img-select-btn" onclick="document.getElementById('file_asset').click()">
             <div style="background-color: #FFF;width: 100%;height: 100%;">
                 <i class="icon-cloud-upload" style="background-color: #FFF;"></i>
             </div>
@@ -22,7 +25,7 @@
     </div>
     <div style="display: none;">
         <form id="file_asset_form" enctype="multipart/form-data">
-        	<input type="file" id="file_asset" onchange="angular.element(this).scope().addFileToWait(this)">
+            <input type="file" id="file_asset" onchange="angular.element(this).scope().addFileToWait(this.files[0])">
         </form>
     </div>
 </div>
